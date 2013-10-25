@@ -30,6 +30,13 @@ exports.mail = {
 
 Other required options are configured automatically post-deployment.
 
+### Differences
+This module has ghost as dependencies. It's the lastest available ghost release
+with some tiny adjustments. Any adjustment that is useful in general will
+be discussed with the ghost team. These modifications include:
+
+- absolute upload path to filesystem for `content/images`
+
 ### Disclaimer
 To overcome the file persistance problem, user content is persisted to mongoDB.
 Hacky? Yes we know, however it is a quick fix for which we had the resources.

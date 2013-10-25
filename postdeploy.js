@@ -35,5 +35,8 @@ fs.writeFileSync(
 // Get data from MongoDB.
 //
 
-
+//
+// Expose the configuration.
+//
+module.exports = config;
 console.log('Pre-startup setup completed');
