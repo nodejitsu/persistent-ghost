@@ -3,7 +3,7 @@
  *
  * @type {String}
  */
-exports.mongo = '';
+exports.mongo = 'mongodb://localhost:27017/ghost';
 
 /**
  * OPTIONAL: Provide e-mail service configuration, not providing these details will

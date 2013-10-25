@@ -53,7 +53,6 @@ Database.prototype.get = function get(fn) {
  */
 Database.prototype.store = function store(filename, content, fn) {
   var self = this;
-
   self.get(function open(db) {
     //
     // First delete any currently available files, before adding again.
@@ -68,7 +67,8 @@ Database.prototype.store = function store(filename, content, fn) {
       gridStore.open(write);
 
       //
-      // Write content to the grid.
+      // Write content to the grid, writeFile cannot be used
+      // due to the absolute file path.
       //
       function write(err, store) {
         if (err) return console.error(err);
@@ -96,6 +96,22 @@ Database.prototype.store = function store(filename, content, fn) {
 Database.prototype.remove = function remove(filename, fn) {
   this.get(function open(db)  {
     GridStore.unlink(db, filename, fn);
+  });
+};
+
+/**
+ * Read the file from MongoDB GridFS.
+ *
+ * @param {String} filename
+ * @param {Function} fn callback
+ * @api public
+ */
+Database.prototype.fetch = function fetch(filename, fn) {
+  this.get(function open(db) {
+    GridStore.read(db, filename, function(err, data) {
+      if (err) return console.error(err);
+      fn(null, data);
+    });
   });
 };
 

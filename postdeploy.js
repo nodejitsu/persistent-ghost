@@ -4,21 +4,27 @@
 // Required modules.
 //
 var fs = require('fs')
+  , mkdirp = require('mkdirp')
+  , async = require('async')
   , path = require('path')
+  , colors = require('colors')
   , local = require('./config')
-  , pkg = require('./package');
+  , pkg = require('./package')
+  , Mongo = require('./mongo')
+  , mongo = new Mongo;
 
 //
 // Path to config, get content and production config.
 //
 var part = path.join(__dirname, 'node_modules', 'ghost')
+  , content = path.join(part, 'content')
   , config = require( path.join(part, 'config.example.js'));
 
 //
 // Create the proper configuration.
 //
 exports.setup = function setup(cb) {
-  console.log('Running pre-startup setup');
+  console.log('Running pre-startup sync\n'.blue);
 
   //
   // Set the right content for production based on the local configuration.
@@ -42,7 +48,50 @@ exports.setup = function setup(cb) {
   function fetch(err) {
     if (err) cb(err);
 
-    cb(null);
-    console.log('Pre-startup setup completed');
+    mongo.get(function open(db) {
+      db.collection('fs.files').find().toArray(process);
+    });
+  }
+
+  //
+  // Process each file in the results.
+  //
+  function process(err, results) {
+    if (err) return cb(err);
+
+    async.forEach(results, synchronise, function done() {
+      console.log('\nPre-startup sync completed\n'.blue);
+      cb.apply(cb, arguments);
+    });
+  }
+
+  //
+  // Get file content and save to filesystem.
+  //
+  function synchronise(file, fn) {
+    var full = path.join(content + file.filename);
+
+    // Get file content
+    mongo.fetch(file.filename, function save(err, data) {
+      if (err) return fn(err);
+
+      // Check if we need to do mkdir -p
+      mkdirp(path.dirname(full), function(err, created) {
+        if (err) return fn(err);
+        if (created) console.log([
+          ' +++'.magenta,
+          created.replace(content, ''),
+          'directory created'
+        ].join(' '));
+
+        // Write the content to disk.
+        fs.writeFile(full, data, function saved(err) {
+          if (err) return fn(err);
+
+          console.log(' +++ '.green + file.filename + ' synced to server');
+          fn();
+        });
+      });
+    });
   }
 };
