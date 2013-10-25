@@ -1,11 +1,6 @@
 'use strict';
 
 //
-// Create the proper configuration.
-//
-console.log('Running pre-startup setup');
-
-//
 // Required modules.
 //
 var fs = require('fs')
@@ -20,23 +15,34 @@ var part = path.join(__dirname, 'node_modules', 'ghost')
   , config = require( path.join(part, 'config.example.js'));
 
 //
-// Set the right content for production based on the local configuration.
+// Create the proper configuration.
 //
-config.development.url = 'http://localhost';
-config.production.url = 'http://' + pkg.subdomain + '.nodejitsu.com';
-config.production.mail = local.mail;
+exports.setup = function setup(cb) {
+  console.log('Running pre-startup setup');
 
-fs.writeFileSync(
-  path.join(part, 'config.js'),
-  'module.exports=' + JSON.stringify(config) + ''
-);
+  //
+  // Set the right content for production based on the local configuration.
+  //
+  config.development.url = 'http://localhost';
+  config.production.url = 'http://' + pkg.subdomain + '.nodejitsu.com';
+  config.production.mail = local.mail;
 
-//
-// Get data from MongoDB.
-//
+  //
+  // Save the config.
+  //
+  fs.writeFile(
+    path.join(part, 'config.js'),
+    'module.exports=' + JSON.stringify(config) + '',
+    fetch
+  );
 
-//
-// Expose the configuration.
-//
-module.exports = config;
-console.log('Pre-startup setup completed');
+  //
+  // Get data from MongoDB.
+  //
+  function fetch(err) {
+    if (err) cb(err);
+
+    cb(null);
+    console.log('Pre-startup setup completed');
+  }
+};

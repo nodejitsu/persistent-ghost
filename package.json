@@ -1,7 +1,7 @@
 {
-  "name": "nodejitsu-ghost",
+  "name": "persistent-ghost",
   "version": "0.0.1-4",
-  "description": "Deploy Ghost Blog on Nodejitsu Inc. architecture",
+  "description": "Wrapper to deploy the Ghost Blog on Nodejitsu PaaS.",
   "main": "index.js",
   "scripts": {
     "start": "node index"
@@ -13,7 +13,6 @@
     "chokidar": "0.7.x",
     "mongodb": "1.3.x"
   },
-  "subdomain": "swaagie-nodejitsu-ghost",
   "engines": {
     "node": "0.10.x"
   }
