@@ -2,7 +2,7 @@
 
 Tiny wrapper aroud the Ghost blog enabling deployment to Nodejitsu. The goal of
 this wrapper is to persist the content of both the `sqlite` database and `content`
-directory. Currently this persistance is done throught MongoDB.
+directory. Currently this persistence is done through MongoDB GridFS.
 
 ### How to use
 
@@ -10,7 +10,7 @@ directory. Currently this persistance is done throught MongoDB.
 ```
 git clone git@github.com:nodejitsu/nodejitsu-ghost.git
 ```
-2. Create MongoDB database via webops interface or jitsu CLI and add the
+2. Create a MongoDB database via webops interface or jitsu CLI and add the
    connection string to 'config.js'.
 ```
 exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
@@ -38,8 +38,8 @@ be discussed with the ghost team. These modifications include:
 - absolute upload path to filesystem for `content/images`
 
 ### Disclaimer
-To overcome the file persistance problem, user content is persisted to mongoDB.
-Hacky? Yes we know, however it is a quick fix for which we had the resources.
+To overcome the file persistence problem, user content is persisted to mongoDB
+GridFS. Hacky? Yes a bit, however it is a quick fix for which we had the resources.
 
 If we can find the resources we'd like to build plugins for ghost. Plugings that
 will use mongoDB for database storage and/or storage providers for content. If
