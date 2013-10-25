@@ -1,6 +1,6 @@
 {
   "name": "nodejitsu-ghost",
-  "version": "0.0.1",
+  "version": "0.0.1-4",
   "description": "Deploy Ghost Blog on Nodejitsu Inc. architecture",
   "main": "index.js",
   "scripts": {

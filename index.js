@@ -9,6 +9,11 @@ var config = require('./config')
   , cwd = __dirname + '/ghost';
 
 //
+// Setup and sync.
+//
+require('./postdeploy');
+
+//
 // Start Ghost blog.
 //
 require('ghost');
