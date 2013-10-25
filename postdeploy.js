@@ -3,7 +3,7 @@
 //
 // Create the proper configuration.
 //
-console.log('Running postdeploy setup');
+console.log('Running pre-startup setup');
 
 //
 // Required modules.
@@ -16,18 +16,19 @@ var fs = require('fs')
 //
 // Path to config, get content and production config.
 //
-var config = path.join(__dirname, 'node_modules', 'ghost', 'config.js')
-  , part = require(config).production;
+var part = path.join(__dirname, 'node_modules', 'ghost')
+  , config = require( path.join(part, 'config.example.js'));
 
 //
 // Set the right content for production based on the local configuration.
 //
-part.url = 'http://' + pkg.subdomain + '.nodejitsu.com';
-part.mail = local.mail;
+config.development.url = 'http://localhost';
+config.production.url = 'http://' + pkg.subdomain + '.nodejitsu.com';
+config.production.mail = local.mail;
 
 fs.writeFileSync(
-  config,
-  'module.exports={production:' + JSON.stringify(part) + '}'
+  path.join(part, 'config.js'),
+  'module.exports=' + JSON.stringify(config) + ''
 );
 
 //
@@ -35,4 +36,4 @@ fs.writeFileSync(
 //
 
 
-console.log('Postdeploy setup completed');
+console.log('Pre-startup setup completed');
