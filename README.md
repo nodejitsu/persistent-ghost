@@ -7,16 +7,21 @@ directory are persisted to MongoDB GridFS.
 ### How to use
 
 1. Clone this module via github or download a release directly from the interface.
+
 ```
 git clone git@github.com:nodejitsu/persistent-ghost.git
 ```
+
 2. Create a MongoDB database via webops interface or jitsu CLI and add the
    connection string to [config.js].
+
 ```
 exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
 ```
+
 3. Create/add an e-mail service configuration (optional) to [config.js]. See the
    Ghost [e-mail documentation][docs] for more details.
+
 ```
 exports.mail = {
   transport: 'SMTP',
@@ -55,5 +60,5 @@ MIT
 [pkgcloud]: https://github.com/nodejitsu/pkgcloud
 [Ghost]: https://ghost.org/
 [docs]: http://docs.ghost.org/mail/
-[config.js]: #TODO
+[config.js]: https://github.com/nodejitsu/persistent-ghost/blob/master/config.js
 [about]: https://ghost.org/about/
