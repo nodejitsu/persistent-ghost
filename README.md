@@ -38,7 +38,7 @@ For more details post setup, see the Ghost [usage documentation][usage].
 Currently the wrapper has a custom ghost as dependency. It's the lastest available
 ghost release with one tiny adjustment. Any adjustments we make and which are useful
 in general will be discussed with the awesome [Ghost team][about].
-Current modifications: [absolute upload][commit] path for `content/images`
+Current modifications: [absolute upload path][commit] for `content/images`
 
 [commit]: https://github.com/Swaagie/ghost/commit/e1a7b8b6472f63aabe6edcd0c63559c74b499b63
 
