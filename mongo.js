@@ -1,6 +1,7 @@
 'use strict';
 
 var url = require('url')
+  , async = require('async')
   , mongo = require('mongodb')
   , Db = mongo.Db
   , Server = mongo.Server
@@ -55,34 +56,50 @@ Database.prototype.store = function store(filename, content, fn) {
   var self = this;
   self.get(function open(db) {
     //
-    // First delete any currently available files, before adding again.
+    // open Grid and write content.
     //
-    self.remove(filename, function clean(err) {
-      if (err) return console.error(err);
-      var gridStore = new GridStore(db, new ObjectID, filename, 'w');
+    var gridStore = new GridStore(db, new ObjectID, filename, 'w');
+    gridStore.open(write);
 
-      //
-      // open Grid and write content.
-      //
-      gridStore.open(write);
+    //
+    // Write content to the grid, writeFile cannot be used
+    // due to the absolute file path.
+    //
+    function write(err, store) {
+      if (err) return fn(err);
+      store.write(content, flush);
+    }
 
-      //
-      // Write content to the grid, writeFile cannot be used
-      // due to the absolute file path.
-      //
-      function write(err, store) {
-        if (err) return console.error(err);
-        store.write(content, flush);
-      }
+    //
+    // Flush the file to GridFS.
+    //
+    function flush(err, store) {
+      if (err) return fn(err);
+      store.close(cleanup);
+    }
 
-      //
-      // Flush the file to GridFS.
-      //
-      function flush(err, store) {
-        if (err) return console.error(err);
-        store.close(fn);
-      }
-    });
+    //
+    // Check if we need to delete older content.
+    //
+    function cleanup() {
+      db.collection('fs.files')
+        .find({ filename: filename })
+        .sort({ uploadDate: 1 })
+        .toArray(function process(err, results) {
+          if (err) return fn(err);
+
+          var n = results.length;
+          if (n < 3) return fn(null);
+
+          //
+          // Delete oldest files but the last two.
+          //
+          async.forEach(results.splice(0, n - 2), function remove(file, done) {
+            var grid = new GridStore(db, file._id, 'r');
+            grid.unlink(done);
+          }, fn);
+        });
+    }
   });
 };
 

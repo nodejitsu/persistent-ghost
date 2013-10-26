@@ -49,15 +49,24 @@ exports.setup = function setup(cb) {
     if (err) cb(err);
 
     mongo.get(function open(db) {
-      db.collection('fs.files').find().toArray(process);
+      db.collection('fs.files')
+        .find()
+        .sort({ filename: 1, uploadDate: -1 })
+        .toArray(process);
     });
   }
 
   //
   // Process each file in the results.
   //
-  function process(err, results) {
+  function process(err, results, prev) {
     if (err) return cb(err);
+
+    results = results.filter(function newest(file) {
+      if (prev === file.filename) return false;
+      prev = file.filename;
+      return true;
+    });
 
     async.forEach(results, synchronise, function done() {
       console.log('\nPre-startup sync completed\n'.blue);

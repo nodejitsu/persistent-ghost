@@ -49,7 +49,8 @@ Ghost.prototype.change = function change(full) {
   fs.readFile(full, function read(err, content) {
     if (err) return console.error('Could not read: ' + relative);
 
-    mongo.store(rel, content, function done() {
+    mongo.store(rel, content, function done(err) {
+      if (err) return console.log(err);
       console.log('Sync complete: ' + rel.green + ' - added || changed');
     });
   });
