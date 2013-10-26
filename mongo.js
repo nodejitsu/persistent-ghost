@@ -95,8 +95,7 @@ Database.prototype.store = function store(filename, content, fn) {
           // Delete oldest files but the last two.
           //
           async.forEach(results.splice(0, n - 2), function remove(file, done) {
-            var grid = new GridStore(db, file._id, 'r');
-            grid.unlink(done);
+            new GridStore(db, file._id, 'r').unlink(done);
           }, fn);
         });
     }
@@ -119,15 +118,23 @@ Database.prototype.remove = function remove(filename, fn) {
 /**
  * Read the file from MongoDB GridFS.
  *
- * @param {String} filename
+ * @param {Object} file
  * @param {Function} fn callback
  * @api public
  */
-Database.prototype.fetch = function fetch(filename, fn) {
+Database.prototype.fetch = function fetch(file, fn) {
   this.get(function open(db) {
-    GridStore.read(db, filename, function(err, data) {
-      if (err) return console.error(err);
-      fn(null, data);
+    var gridStore = new GridStore(db, file._id, 'r');
+    gridStore.open(function open(err, gridStore) {
+      if (err) return fn(err);
+
+      //
+      // Reset read/write head to beginning of file.
+      //
+      gridStore.seek(0, function move(err, gridStore) {
+        if (err) return fn(err);
+        gridStore.read(fn);
+      });
     });
   });
 };

@@ -82,7 +82,7 @@ exports.setup = function setup(cb) {
     var full = path.join(content + file.filename);
 
     // Get file content
-    mongo.fetch(file.filename, function save(err, data) {
+    mongo.fetch(file, function save(err, data) {
       if (err) return fn(err);
 
       // Check if we need to do mkdir -p

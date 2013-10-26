@@ -23,17 +23,20 @@ function Ghost() {
     if (err) throw err;
 
     //
-    // Start listening for file changes in eiter sqlite or content, ignore journaling.
-    //
-    ghost.watcher = notify.watch(content, { ignored: /\.db-journal$/ })
-      .on('change', ghost.change)
-      .on('unlink', ghost.unlink)
-      .on('err', console.error);
-
-    //
     // Start Ghost blog.
     //
-    require('ghost');
+    ghost.blog = require('ghost');
+
+    //
+    // Wait two second, to prevent premature triggering, before  listening
+    // for file changes in eiter sqlite or content, ignore journaling.
+    //
+    setTimeout(function defer() {
+      ghost.watcher = notify.watch(content, { ignored: /\.db-journal$/ })
+        .on('change', ghost.change)
+        .on('unlink', ghost.unlink)
+        .on('err', console.error);
+    }, 2000);
   });
 }
 
