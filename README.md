@@ -1,11 +1,9 @@
 ## Persistent Ghost
-
 Tiny wrapper aroud the [Ghost] blog enabling deployment to Nodejitsu. The goal
 of this wrapper is to persist content. Both the `sqlite` database and `content`
 directory are persisted to MongoDB GridFS.
 
 ### How to use
-
 1. Clone this module via github or download a release directly from the interface.
 
 ```
@@ -13,16 +11,13 @@ git clone git@github.com:nodejitsu/persistent-ghost.git
 ```
 
 2. Create a MongoDB database via webops interface or jitsu CLI and add the
-   connection string to [config.js].
+   connection string to [config.js]. Optionally, you can configure an e-mail
+   service. See the Ghost [e-mail documentation][docs] for more details.
 
-```
+```js
 exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
-```
 
-3. Create/add an e-mail service configuration (optional) to [config.js]. See the
-   Ghost [e-mail documentation][docs] for more details.
-
-```
+// OPTIONAL
 exports.mail = {
   transport: 'SMTP',
   options: {
@@ -34,16 +29,19 @@ exports.mail = {
 }
 ```
 
-Other required options are configured automatically post-deployment.
+3. Run `jitsu deploy`, acknowledge the provided subdomain or provide a custom
+   subdomain to [package.json].
+
+For more details post setup, see the Ghost [usage documentation][usage].
 
 ### Features
 - Sync all files of the `content` directory to MongoDB GridFS.
 - Backup for each file the latest two versions are stored.
 - Recovery option by setting `RECOVER=true` as environment variable.
 
-The wrapper has ghost as dependency. It's the lastest available ghost release
-with some tiny adjustments. Any adjustments we made and which are useful in general
-will be discussed with the awesome [Ghost team][about]. Current modifications:
+Currently the wrapper has a custom ghost as dependency. It's the lastest available
+ghost release with one tiny adjustment. Any adjustments we make and which are useful
+in general will be discussed with the awesome [Ghost team][about]. Current modifications:
 - absolute upload path for `content/images`
 
 ### Disclaimer
@@ -57,6 +55,8 @@ more details.
 
 MIT
 
+[usage]: http://docs.ghost.org/usage/
+[package.json]: https://github.com/nodejitsu/persistent-ghost/blob/master/package.json
 [pkgcloud]: https://github.com/nodejitsu/pkgcloud
 [Ghost]: https://ghost.org/
 [docs]: http://docs.ghost.org/mail/
