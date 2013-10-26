@@ -5,14 +5,12 @@ directory are persisted to MongoDB GridFS.
 
 ### How to use
 1. Clone this module via github or download a release directly from the interface.
-
 ```
 git clone git@github.com:nodejitsu/persistent-ghost.git
 ```
 2. Create a MongoDB database via webops interface or jitsu CLI and add the
    connection string to [config.js]. Optionally, you can configure an e-mail
    service. See the Ghost [e-mail documentation][docs] for more details.
-
 ```js
 exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
 
