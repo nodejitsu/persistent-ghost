@@ -18,7 +18,8 @@ var fs = require('fs')
 //
 var part = path.join(__dirname, 'node_modules', 'ghost')
   , content = path.join(part, 'content')
-  , config = require( path.join(part, 'config.example.js'));
+  , config = require( path.join(part, 'config.example.js'))
+  , recover = process.env.RECOVER;
 
 //
 // Create the proper configuration.
@@ -51,7 +52,7 @@ exports.setup = function setup(cb) {
     mongo.get(function open(db) {
       db.collection('fs.files')
         .find()
-        .sort({ filename: 1, uploadDate: -1 })
+        .sort({ filename: 1, uploadDate: recover ? 1 : -1 })
         .toArray(process);
     });
   }
