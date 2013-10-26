@@ -9,7 +9,6 @@ directory are persisted to MongoDB GridFS.
 ```
 git clone git@github.com:nodejitsu/persistent-ghost.git
 ```
-
 2. Create a MongoDB database via webops interface or jitsu CLI and add the
    connection string to [config.js]. Optionally, you can configure an e-mail
    service. See the Ghost [e-mail documentation][docs] for more details.
@@ -17,7 +16,7 @@ git clone git@github.com:nodejitsu/persistent-ghost.git
 ```js
 exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
 
-// OPTIONAL
+// recommended for password recovery, but optional
 exports.mail = {
   transport: 'SMTP',
   options: {
@@ -28,7 +27,6 @@ exports.mail = {
   }
 }
 ```
-
 3. Run `jitsu deploy`, acknowledge the provided subdomain or provide a custom
    subdomain to [package.json].
 
@@ -41,8 +39,10 @@ For more details post setup, see the Ghost [usage documentation][usage].
 
 Currently the wrapper has a custom ghost as dependency. It's the lastest available
 ghost release with one tiny adjustment. Any adjustments we make and which are useful
-in general will be discussed with the awesome [Ghost team][about]. Current modifications:
-- absolute upload path for `content/images`
+in general will be discussed with the awesome [Ghost team][about].
+Current modifications: [absolute upload][commit] path for `content/images`
+
+[commit]: https://github.com/Swaagie/ghost/commit/e1a7b8b6472f63aabe6edcd0c63559c74b499b63
 
 ### Disclaimer
 The current solution is not perfect, it's a quick fix. Direct storage to mongoDB
