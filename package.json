@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": "https://github.com/nodejitsu/persistent-ghost",
   "dependencies": {
-    "ghost": "git://github.com/TryGhost/Ghost.git#0.3.3",
+    "ghost": "git://github.com/Swaagie/ghost.git#master",
     "async": "0.2.x",
     "mkdirp": "0.3.x",
     "chokidar": "0.7.x",
