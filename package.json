@@ -9,7 +9,7 @@
   "author": "Martijn Swaagman",
   "license": "MIT",
   "dependencies": {
-    "ghost": "git://github.com/TryGhost/Ghost.git#0.3.3-1",
+    "ghost": "git://github.com/TryGhost/Ghost.git#0.3.3",
     "async": "0.2.x",
     "mkdirp": "0.3.x",
     "chokidar": "0.7.x",
