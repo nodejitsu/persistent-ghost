@@ -32,8 +32,13 @@ exports.setup = function setup(cb) {
   // Set the right content for production based on the local configuration.
   //
   config.development.url = 'http://localhost';
-  config.production.url = 'http://' + pkg.subdomain + '.nodejitsu.com';
   config.production.mail = local.mail;
+  config.production.url = [
+    'http://',
+    pkg.domains.length
+      ? pkg.domains[0]
+      : pkg.subdomain + '.nodejitsu.com'
+  ].join('');
 
   //
   // Save the config.
