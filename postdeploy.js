@@ -4,6 +4,7 @@
 // Required modules.
 //
 var fs = require('fs')
+  , spawn = require('child_process').spawn
   , mkdirp = require('mkdirp')
   , async = require('async')
   , path = require('path')
@@ -18,7 +19,7 @@ var fs = require('fs')
 //
 var part = path.join(__dirname, 'node_modules', 'ghost')
   , content = path.join(part, 'content')
-  , config = require( path.join(part, 'config.example.js'))
+  , config = require(path.join(part, 'config.example.js'))
   , recover = process.env.RECOVER;
 
 //
@@ -40,8 +41,29 @@ exports.setup = function setup(cb) {
   fs.writeFile(
     path.join(part, 'config.js'),
     'module.exports=' + JSON.stringify(config) + '',
-    fetch
+    getTheme
   );
+
+  //
+  // Git clone all provided themes.
+  //
+  function getTheme() {
+    var themes = local.themes
+      , target = path.join(content, 'themes');
+
+    mkdirp(target, function(err, created) {
+      if (err) return cb(err);
+
+      async.forEach(Object.keys(themes), function clone(name, fn) {
+        var themePath = path.join(target, name);
+        fs.exists(themePath, function check(exists) {
+          if (exists) return fn();
+          var child = spawn('git', ['clone', themes[name], themePath]);
+          child.on('exit', fn);
+        });
+      }, fetch);
+    });
+  }
 
   //
   // Get data from MongoDB.
