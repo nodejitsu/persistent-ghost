@@ -8,6 +8,7 @@
   },
   "author": "Martijn Swaagman",
   "license": "MIT",
+  "repository": "https://github.com/nodejitsu/persistent-ghost",
   "dependencies": {
     "ghost": "git://github.com/TryGhost/Ghost.git#0.3.3",
     "async": "0.2.x",
