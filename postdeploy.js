@@ -35,7 +35,7 @@ exports.setup = function setup(cb) {
   config.production.mail = local.mail;
   config.production.url = [
     'http://',
-    pkg.domains.length
+    pkg.domains && pkg.domains.length
       ? pkg.domains[0]
       : pkg.subdomain + '.nodejitsu.com'
   ].join('');
