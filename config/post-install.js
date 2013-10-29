@@ -42,10 +42,10 @@ module.exports = function postInstall(jitsu, done) {
   function setup(database) {
     var data = database.metadata.uri + '/' + database.metadata.dbname;
 
-    fs.readFile('./config.js', 'utf-8', function read(err, content) {
+    fs.readFile(__dirname + '/config.js', 'utf-8', function read(err, content) {
       if (err) return error(err);
 
-      fs.writeFile('./config.js', content.replace('mongodb://localhost:27017/ghost', data), done);
+      fs.writeFile(__dirname + '/config.js', content.replace('mongodb://localhost:27017/ghost', data), done);
     });
   }
 
