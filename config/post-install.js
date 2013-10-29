@@ -30,7 +30,7 @@ module.exports = function postInstall(jitsu, done) {
   function create() {
     database.create('mongo', name, function create(err, result) {
       if (err) return error(err);
-      setup(result.database);
+      setup(result);
     });
   }
 
@@ -56,6 +56,6 @@ module.exports = function postInstall(jitsu, done) {
   //
   database.get(name, function get(err, result) {
     if (err && !result) return create();
-    setup(result.database);
+    setup(result);
   });
 };

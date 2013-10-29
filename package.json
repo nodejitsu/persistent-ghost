@@ -1,6 +1,6 @@
 {
   "name": "persistent-ghost",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Wrapper to deploy the Ghost blog on Nodejitsu",
   "main": "index.js",
   "scripts": {
