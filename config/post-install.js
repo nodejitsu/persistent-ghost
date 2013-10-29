@@ -9,7 +9,8 @@
  */
 module.exports = function postInstall(jitsu, done) {
   var database = jitsu.databases
-    , fs = require('fs');
+    , fs = require('fs')
+    , name = 'ghost-blog';
 
   /**
    * Error processor.
@@ -27,7 +28,7 @@ module.exports = function postInstall(jitsu, done) {
    * @api private
    */
   function create() {
-    database.create('mongo', 'ghost', function create(err, result) {
+    database.create('mongo', name, function create(err, result) {
       if (err) return error(err);
       setup(result.database);
     });
@@ -53,7 +54,7 @@ module.exports = function postInstall(jitsu, done) {
   // Check if the ghost database is already setup,
   // if not create a mongolab database.
   //
-  database.get('ghost', function get(err, result) {
+  database.get(name, function get(err, result) {
     if (err && !result) return create();
     setup(result.database);
   });
