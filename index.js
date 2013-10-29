@@ -6,7 +6,7 @@
 var fs = require('fs')
   , path = require('path')
   , notify = require('chokidar')
-  , Mongo = require('./mongo')
+  , Mongo = require('./lib/mongo')
   , mongo = new Mongo
   , content = path.join(__dirname, 'node_modules', 'ghost', 'content');
 
@@ -19,7 +19,7 @@ function Ghost() {
   //
   // Setup and sync.
   //
-  require('./postdeploy').setup(function done(err) {
+  require('./lib/pre-startup').setup(function done(err) {
     if (err) throw err;
 
     //
