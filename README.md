@@ -48,7 +48,7 @@ Current modifications: [absolute upload path][commit] for `content/images`
 
 ### Disclaimer
 The current solution is not perfect, it's a quick fix. Direct storage to mongoDB
-and/or cntent storage to a dedicated storage service would be prefered. If you
+and/or content storage to a dedicated storage service would be prefered. If you
 would like to help out, check [pkgcloud] to get started. Although we expect the
 module to work properly, this package is provided "AS IS", see the License for
 more details.
