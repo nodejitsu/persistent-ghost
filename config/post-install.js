@@ -8,7 +8,7 @@
  * @api public
  */
 module.exports = function postInstall(jitsu, done) {
-  var database = jitsu.api.Databases
+  var database = jitsu.api.databases
     , fs = require('fs');
 
   /**
