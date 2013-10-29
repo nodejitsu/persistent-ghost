@@ -42,7 +42,7 @@ module.exports = function postInstall(jitsu, done) {
    */
   function setup(database) {
     var data = database.metadata.uri + '/' + database.metadata.dbname
-      , path = __dirname + '/config/index.js';
+      , path = __dirname + '/index.js';
 
     fs.readFile(path, 'utf-8', function read(err, content) {
       if (err) return error(err);
