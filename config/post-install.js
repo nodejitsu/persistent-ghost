@@ -8,7 +8,7 @@
  * @api public
  */
 module.exports = function postInstall(jitsu, done) {
-  var exec = jitsu.exec
+  var database = jitsu.databases
     , fs = require('fs');
 
   /**
@@ -27,7 +27,7 @@ module.exports = function postInstall(jitsu, done) {
    * @api private
    */
   function create() {
-    exec(['databases', 'create', 'mongo', 'ghost-blog'], function create(err, result) {
+    database.create('mongo', 'ghost', function create(err, result) {
       if (err) return error(err);
       setup(result.database);
     });
@@ -53,7 +53,7 @@ module.exports = function postInstall(jitsu, done) {
   // Check if the ghost database is already setup,
   // if not create a mongolab database.
   //
-  exec(['databases', 'get', 'ghost-blog'], function get(err, result) {
+  database.get('ghost', function get(err, result) {
     if (err && !result) return create();
     setup(result.database);
   });
