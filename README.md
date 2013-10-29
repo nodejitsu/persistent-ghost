@@ -16,7 +16,7 @@ directory are persisted to MongoDB GridFS.
 
    // recommended for password recovery, but optional
    exports.mail = {
-     ransport: 'SMTP',
+     transport: 'SMTP',
      options: {
        auth: {
         user: 'youremail@gmail.com',
