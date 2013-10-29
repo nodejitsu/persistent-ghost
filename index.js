@@ -25,6 +25,7 @@ function Ghost() {
     //
     // Start Ghost blog.
     //
+    process.chdir(path.dirname(content));
     ghost.blog = require('ghost');
 
     //
