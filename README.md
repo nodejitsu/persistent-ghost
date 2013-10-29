@@ -4,6 +4,10 @@ of this wrapper is to persist content. Both the `sqlite` database and `content`
 directory are persisted to MongoDB GridFS.
 
 ### How to use
+The most easy thing to do is `jitsu install ghost` which will do steps 1 and 2
+for you. For more fine-grained control however you can manually do these three
+steps.
+
 1. Clone this module via github or download a release directly from the interface.
    ```
    git clone git@github.com:nodejitsu/persistent-ghost.git
