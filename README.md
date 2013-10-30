@@ -5,18 +5,19 @@ directory are persisted to MongoDB GridFS.
 
 ### How to use
 The most easy thing to do is `jitsu install ghost` which will do steps 1 and 2
-for you. For more fine-grained control however you can manually do these three
-steps.
+for you. It default to the database name: 'ghost-blog'. For more fine-grained 
+control you can follow the three steps below.
 
 1. Clone this module via github or download a release directly from the interface.
    ```
    git clone git@github.com:nodejitsu/persistent-ghost.git
    ```
-2. Create a MongoDB database via webops interface or jitsu CLI and add the
-   connection string to [config.js]. Optionally, you can configure an e-mail
-   service. See the Ghost [e-mail documentation][docs] for more details.
+2. Create a MongoDB database via webops interface or jitsu CLI 
+   `jitsu databases create mongo [blog]`, where blog is the database name. After
+   add the connection string to [config.js]. Optionally, you can configure an 
+   e-mail service. See the Ghost [e-mail documentation][docs] for more details.
    ```js
-   exports.mongo = 'mongodb://nodejitsu:7f812389821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12938192';
+   exports.mongo = 'mongodb://nodejitsu:7f81223821312fd3192545fd9@paulo.mongohq.com:10051/nodejitsudb12238192';
 
    // recommended for password recovery, but optional
    exports.mail = {
