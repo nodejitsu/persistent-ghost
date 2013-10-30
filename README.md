@@ -13,7 +13,7 @@ control you can follow the three steps below.
    git clone git@github.com:nodejitsu/persistent-ghost.git
    ```
 2. Create a MongoDB database via webops interface or jitsu CLI 
-   `jitsu databases create mongo [blog]`, where blog is the database name. After
+   `jitsu databases create mongo blog`, where blog is the database name. After
    add the connection string to [config.js]. Optionally, you can configure an 
    e-mail service. See the Ghost [e-mail documentation][docs] for more details.
    ```js
