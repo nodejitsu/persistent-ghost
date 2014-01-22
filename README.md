@@ -61,6 +61,13 @@ In development, redoing installation steps works for now.
 git pull origin master
 ```
 
+Only required if you forked, simply add the orginal repo as upstream remote.
+
+```bash
+git remote add upstream git@github.com:nodejitsu/persistent-ghost.git
+git pull upstream master
+```
+
 ### Disclaimer
 The current solution is not perfect, it's a quick fix. Direct storage to mongoDB
 and/or content storage to a dedicated storage service would be prefered. If you
