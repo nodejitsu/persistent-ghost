@@ -63,5 +63,5 @@ MIT
 [pkgcloud]: https://github.com/nodejitsu/pkgcloud
 [Ghost]: https://ghost.org/
 [docs]: http://docs.ghost.org/mail/
-[config.js]: https://github.com/nodejitsu/persistent-ghost/blob/master/config.js
+[config.js]: https://github.com/nodejitsu/persistent-ghost/blob/master/config/index.js
 [about]: https://ghost.org/about/
