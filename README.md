@@ -51,11 +51,11 @@ Current modifications: [absolute upload path][commit] for `content/images`
 
 Follow the instructions below to upgrade.
 
-*Installed with jitsu install*
+**Installed with jitsu install**
 
 In development, redoing installation steps works for now.
 
-*Installed with git*
+**Installed with git**
 
 ```bash
 git pull origin master
