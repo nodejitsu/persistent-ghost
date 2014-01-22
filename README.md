@@ -59,6 +59,7 @@ In development, redoing installation steps works for now.
 
 ```bash
 git pull origin master
+jitsu deploy
 ```
 
 Only required if you forked, simply add the orginal repo as upstream remote.
@@ -66,6 +67,7 @@ Only required if you forked, simply add the orginal repo as upstream remote.
 ```bash
 git remote add upstream git@github.com:nodejitsu/persistent-ghost.git
 git pull upstream master
+jitsu deploy
 ```
 
 ### Disclaimer
