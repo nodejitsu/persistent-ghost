@@ -25,11 +25,10 @@ function Ghost() {
     //
     // Start Ghost blog.
     //
-    process.chdir(path.dirname(content));
-    ghost.blog = require('ghost');
+    ghost.blog = require('ghost')();
 
     //
-    // Wait two second, to prevent premature triggering, before  listening
+    // Wait two second, to prevent premature triggering, before listening
     // for file changes in eiter sqlite or content, ignore journaling.
     //
     setTimeout(function defer() {

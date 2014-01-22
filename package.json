@@ -1,6 +1,6 @@
 {
   "name": "persistent-ghost",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Wrapper to deploy the Ghost blog on Nodejitsu",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "repository": "https://github.com/nodejitsu/persistent-ghost",
   "jitsu-install": "./config/post-install",
   "dependencies": {
-    "ghost": "git://github.com/Swaagie/ghost.git#master",
+    "ghost": "git://github.com/Swaagie/ghost.git#0.4",
     "async": "0.2.x",
     "mkdirp": "0.3.x",
     "chokidar": "0.7.x",
