@@ -47,6 +47,14 @@ Current modifications: [absolute upload path][commit] for `content/images`
 
 [commit]: https://github.com/Swaagie/ghost/commit/e1a7b8b6472f63aabe6edcd0c63559c74b499b63
 
+### Themes
+Ghost can be provided with themes in two ways, both via `config/index.js`
+
+- provide a git url to a theme for cloning. This is the advised method,
+  `casper: 'git://github.com/TryGhost/Casper.git'`
+- provide the name of a submodule, if your theme is private you should add it to
+  bundledDependencies. `private: 'mytheme'`
+
 ### Upgrading
 
 Follow the instructions below to upgrade.

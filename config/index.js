@@ -7,6 +7,7 @@ exports.mongo = 'mongodb://localhost:27017/ghost';
 
 /**
  * Which themes should be added to /themes, provide as { name: source }.
+ * Source can either be a valid git URL or the name of a submodule.
  *
  * @type {Object}
  */
