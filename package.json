@@ -6,10 +6,16 @@
   "scripts": {
     "start": "node index"
   },
+  "homepage": "https://www.nodejitsu.com",
+  "keywords": "Ghost,blog,nodejitsu,persistent,layer,wrapper",
   "author": "Martijn Swaagman",
   "license": "MIT",
   "repository": "https://github.com/nodejitsu/persistent-ghost",
   "jitsu-install": "./config/post-install",
+  "bugs": {
+    "url": "http://github.com/nodejitsu/persistent-ghost/issues",
+    "email": "martijn@nodejitsu.com"
+  },
   "dependencies": {
     "async": "~0.2.10",
     "chokidar": "~0.8.1",
