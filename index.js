@@ -32,7 +32,7 @@ function Ghost() {
     // for file changes in eiter sqlite or content, ignore journaling.
     //
     setTimeout(function defer() {
-      ghost.watcher = notify.watch(content, { ignored: /\.db-journal$/ })
+      ghost.watcher = notify.watch(content, { ignored: /\.git|\.db-journal$/ })
         .on('change', ghost.change)
         .on('unlink', ghost.unlink)
         .on('err', console.error);
