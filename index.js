@@ -27,17 +27,23 @@ function Ghost() {
     //
     ghost.blog = require('ghost')();
 
+
     //
-    // Wait two second, to prevent premature triggering, before listening
-    // for file changes in eiter sqlite or content, ignore journaling.
+    // Post Startup
     //
-    setTimeout(function defer() {
-      ghost.watcher = notify.watch(content, { ignored: /README\.md|\/themes\/|\.git|\.db-journal$/ })
-        .on('change', ghost.change)
-        .on('add', ghost.change)
-        .on('unlink', ghost.unlink)
-        .on('err', console.error);
-    }, 2000);
+    require('./lib/post-startup').setup(function done(err) {
+      //
+      // Wait two second, to prevent premature triggering, before listening
+      // for file changes in eiter sqlite or content, ignore journaling.
+      //
+      setTimeout(function defer() {
+        ghost.watcher = notify.watch(content, { ignored: /README\.md|\/themes\/|\.git|\.db-journal$/ })
+          .on('change', ghost.change)
+          .on('add', ghost.change)
+          .on('unlink', ghost.unlink)
+          .on('err', console.error);
+      }, 2000);
+    });
   });
 }
 
