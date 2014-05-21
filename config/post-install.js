@@ -19,7 +19,7 @@ module.exports = function postInstall(jitsu, done) {
    * @api private
    */
   function error(err) {
-    done('Installation of persistent-ghost failed', err);
+    done(new Error('Installation of persistent-ghost failed: ' + err.message));
   }
 
   /**
@@ -28,7 +28,7 @@ module.exports = function postInstall(jitsu, done) {
    * @api private
    */
   function create() {
-    database.create('mongo', name, function create(err, result) {
+    database.create('mongohq', name, function create(err, result) {
       if (err) return error(err);
       setup(result);
     });
