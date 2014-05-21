@@ -1,24 +1,36 @@
-/**
- * REQUIRED: MongoDB connection string. Example: mongoHQ via nodejitsu
- *
- * @type {String}
- */
-exports.mongo = 'mongodb://localhost:27017/ghost';
+'use strict';
 
-/**
- * Which themes should be added to /themes, provide as { name: source }.
- * Source can either be a valid git URL or the name of a submodule.
- *
- * @type {Object}
- */
-exports.themes = {
-  casper: 'git://github.com/TryGhost/Casper.git'
+//
+// Configuration per environment, development is default. Configuration options:
+//   - mongo: {String} MongoDB connection. Example: mongoHQ via nodejitsu.
+//   - themes: {Object} name:source combination, valid git URL or submodule name.
+//   - mail: {Object} optional e-mail service, required for password recovery.
+//
+var config = {
+  development: {
+    mongo: 'mongodb://localhost:27017/blog',
+    themes: {
+      casper: 'git://github.com/TryGhost/Casper.git'
+    },
+    mail: {}
+  },
+
+  production: {
+    mongo:  'mongodb://localhost:27017/blog',
+    themes: {
+      casper: 'git://github.com/TryGhost/Casper.git'
+    },
+    mail: {}
+  }
 };
 
 /**
- * OPTIONAL: Provide e-mail service configuration, not providing these details will
- * disable password recovery, also a closeable warning is shown.
+ * Return the correct configuration based on environment.
  *
- * @type {Array}
+ * @param {String} env environment setting
+ * @return {Object} configuration
+ * @api public
  */
-exports.mail = {};
+module.exports = function get(env) {
+  return env in config ? config[env] : config.development;
+};
