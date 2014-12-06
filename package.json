@@ -18,12 +18,12 @@
   },
   "dependencies": {
     "async": "~0.9.0",
-    "chokidar": "~0.8.1",
-    "colors": "~0.6.2",
-    "ghost": "~0.5.0",
+    "chokidar": "~0.11.1",
+    "colors": "~1.0.3",
+    "ghost": "~0.5.6",
     "mkdirp": "~0.5.0",
-    "mongodb": "~1.4.4",
-    "ncp": "~0.5.0"
+    "mongodb": "~1.4.23",
+    "ncp": "~1.0.1"
   },
   "engines": {
     "node": "0.10.x"
